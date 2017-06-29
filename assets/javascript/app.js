@@ -34,3 +34,28 @@ $("#submit-button").on('click', function(){
   $('input').val('')
 })
 
+//listen for a new child
+database.ref().on('child_added', function(snap){
+
+  console.log(snap.val())
+  var monthsConvert = moment(snap.val().date, "DD/MM/YYYY")
+  var monthsWorked = moment().diff(monthsConvert, 'months')
+  var payToDate = monthsWorked * snap.val().rate
+  console.log(moment().diff(snap.val().date, "months"))
+  console.log(payToDate)
+  /////////////////
+  var trainInfo = $('<tr>');
+  var displayName = $('<td>').append(snap.val().name);
+  var displayDestination = $('<td>').append(snap.val().destination);
+  var displayTrainTime = $('<td>').append(snap.val().firstTrainTime);
+  var displayFrequency = $('<td>').append(snap.val().frequency);
+  /////////////////
+  var displayRate = $('<td>').append(snap.val().rate);
+  var displayPay = $('<td>').append(payToDate);
+
+  trainInfo.append(displayName, displayDestination, displayTrainTime, displayFrequency)
+  $('#train-list').append(trainInfo)
+
+}, function(err){
+  console.log(err.code)
+})

@@ -1,5 +1,8 @@
 body {
-    background: url("http://www.horadent.com/i/2017/05/hipster-we-heart-it-wallpaper-desktop-background.jpg");
+	background: url("http://www.horadent.com/i/2017/05/hipster-we-heart-it-wallpaper-desktop-background.jpg");
+	margin-top: 40px;
+	margin-bottom: 20px;
+	font-family: papyrus;
   }
 
 #header-one, #current-schedule, #panel-head, #submit-button {

@@ -1,5 +1,4 @@
 <!--Refer to Group Timesheet Activity for structure and reference-->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +18,22 @@
 </head>
 
 <body>
+  <!--This contains everything and is useful for CSS editing later-->
   <div class="container">
-
+    <!--The ID header-one will hold the title of our program-->
+    <!--No column specification is necessary in Bootstrap because it spans the page-->
     <div class="row text-center jumbotron" id="header-one">
         <h1>Comprehensive Train Schedule | Welcome Aboard!</h1>
         <p>Plan Your Trip Below<p>
     </div>
 
+    <!--This holds the table that will be appended with the train info-->
     <div class="row panel panel-default">
-
+    <!--This is the header for the train info segment appended to-->
       <div class="panel-heading" id="current-schedule">
           Current Train Schedule
        </div>
+          <!--The titles for each category in the train info table-->
           <div class="panel-body">
             <table class="table">
             <thead>
@@ -42,8 +45,56 @@
                   <th>Minutes Away</th>
                 </tr>
             </thead>
-            
-                  
+            <!--The train info table that will be appended to dynamically from JS-->
+            <tbody id="train-list">
+              <tr>
+                <th scope="row"></th>
+                  <td id="name-display"></td>
+                  <td id="destination-display"></td>
+                  <td id="frequency-display"></td>
+                  <td id="arrival-display"></td>
+                  <td id="minutes-display"></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+
+      <!--This will gather the info user inputs into categories that append up-->  
+      <div class="row" id="add-train">
+        <div class="panel panel-default">
+          <!--Title for the train user info input segment-->
+          <div class="panel-heading" id='panel-head'>
+            Add Train
+          </div>
+          <!--Adds train name from user input-->
+          <div class="panel-body">
+            Train Name
+            <input type="text" class="form-control" id="train-name" required>
+          </div>
+          <!--Adds destination from user input-->
+          <div class="panel-body">
+            Destination
+            <input type="text" class="form-control" id="destination">
+          </div>
+          <!--Adds time from user input in military format only-->
+          <div class="panel-body">
+            First Train Time (HH:mm - military time)
+            <input type="text" class="form-control" id="first-train-time">
+          </div>
+          <!--Adds frequency of train arrivals/departures from user input-->
+          <div class="panel-body" id="bottom-panel-body">
+            Frequency (min)
+            <input type="text" class="form-control" id="frequency">
+          </div>
+          <!--Grabs all of the information from a click function and appends up-->
+          <button class="btn" id='submit-button'>
+            Submit
+          </button>  
+
+        </div>
+      </div>
+  </div>          
 
 </body>
 </html>

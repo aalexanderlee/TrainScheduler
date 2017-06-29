@@ -1,10 +1,18 @@
 body {
     background: url("http://www.horadent.com/i/2017/05/hipster-we-heart-it-wallpaper-desktop-background.jpg");
   }
-  #header-one, #current-schedule, #panel-head, #submit-button {
+
+#header-one, #current-schedule, #panel-head, #submit-button {
     background:teal;
     color:white;
     }
-  button {
+
+button {
     margin-left: 15px;
   }
+
+#submit-button {
+	padding-left: 40px;
+	padding-right: 40px;
+	margin-bottom: 20px;
+}

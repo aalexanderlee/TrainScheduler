@@ -1,5 +1,6 @@
+$(document).ready(function(){
 //This progam will grab user input and append to the table, ID "train-list"
-//Initializing Firebase to a Train Scheduler database
+//Initialize Firebase to a Train Scheduler database
 var config = {
   apiKey: "AIzaSyB5lbwpv7jwNVV00A4PBPZM4pIcGnW1V7E",
   authDomain: "train-scheduler-7ecb6.firebaseapp.com",
@@ -14,16 +15,16 @@ var database = firebase.database();
 
 //Grabs and appends the user info for train details when they click "Submit" at bottom
 $("#submit-button").on('click', function(){
-  var newName = $('#train-name').val().trim();
-  var newDestination = $('#destination').val().trim();
-  var newTrainTime = $('#first-train-time').val().trim();
-  var newFrequency = $('#frequency').val().trim();
+  var newName = $('#train-name').val().trim(); //given to append
+  var newDestination = $('#destination').val().trim(); //given to append
+  var newFrequency = $('#frequency').val().trim(); //given to append and used for calculations
+  var newArrival = $('#new-arrival').val().trim(); //used for calculations
 
-  //This pushes (AKA uploads) user info for train details into the firebase cloud
+  //This provides a path and pushes user info for train details into the firebase cloud
   database.ref().push({
     name: newName,
     destination: newDestination,
-    firstTrainTime: newTrainTime,
+    arrival: newArrival,
     frequency: newFrequency,
     startedAt: firebase.database.ServerValue.TIMESTAMP
   })
@@ -38,24 +39,31 @@ $("#submit-button").on('click', function(){
 database.ref().on('child_added', function(snap){
 
   console.log(snap.val())
-  var monthsConvert = moment(snap.val().date, "DD/MM/YYYY")
-  var monthsWorked = moment().diff(monthsConvert, 'months')
-  var payToDate = monthsWorked * snap.val().rate
-  console.log(moment().diff(snap.val().date, "months"))
-  console.log(payToDate)
-  /////////////////
+  
+  //Display all user given inputs (train name, destination, frequency)
   var trainInfo = $('<tr>');
   var displayName = $('<td>').append(snap.val().name);
   var displayDestination = $('<td>').append(snap.val().destination);
-  var displayTrainTime = $('<td>').append(snap.val().firstTrainTime);
   var displayFrequency = $('<td>').append(snap.val().frequency);
-  /////////////////
-  var displayRate = $('<td>').append(snap.val().rate);
-  var displayPay = $('<td>').append(payToDate);
 
-  trainInfo.append(displayName, displayDestination, displayTrainTime, displayFrequency)
-  $('#train-list').append(trainInfo)
+  //Calculate the difference in time to find arrival with frequency data stored in Firebase
+  var timeDiff = moment().diff(moment.unix(snap.val().arrival), "minutes");
+  var timeLeft = moment().diff(moment.unix(snap.val().arrival), "minutes") % (snap.val().frequency);
+  
+  var minutes = newFrequency - timeLeft;
+  var nextArrival = moment().add(minutes, "m").format("hh:mm A"); 
+
+  //Display next arrival
+  var displayNextArrival = $('<td>').append(nextArrival);
+  //Display minutes until arrival from moment
+  var displayMinutes = $('<td>').append(minutes);
+
+  trainInfo.append(displayName, displayDestination, displayFrequency, displayNextArrival, displayMinutes);
+  $('#train-list').append(trainInfo);
 
 }, function(err){
-  console.log(err.code)
-})
+  console.log("Errors: " + err.code);
+  //alert(err.code)
+  });
+
+});

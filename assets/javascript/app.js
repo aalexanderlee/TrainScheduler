@@ -68,6 +68,7 @@ database.ref().on("child_added", function(snapshot){
 
   var displayArrival = $('<td>').append(nextArrival);
   var displayMinutes = $('<td>').append(minutes);
+
   //Display next arrival
   //var displayNextArrival = $('<td>').append(nextArrival);
   //Display minutes until arrival from moment
@@ -80,7 +81,5 @@ database.ref().on("child_added", function(snapshot){
   console.log("Errors: " + err.code);
   //alert(err.code)
   });
-
-clear();
 
 });

@@ -1,13 +1,13 @@
 body {
-	background: url("http://www.horadent.com/i/2017/05/hipster-we-heart-it-wallpaper-desktop-background.jpg");
+	background: url("http://architectureimg.com/wp-content/uploads/2016/06/skyscrapers-beautiful-san-francisco-night-thebeautifulbay-skyscrapers-bridge-city-lights-desktop-backgrounds.jpg");
 	margin-top: 40px;
 	margin-bottom: 20px;
 	font-family: papyrus;
   }
 
 #header-one, #current-schedule, #panel-head, #submit-button {
-    background:teal;
-    color:white;
+    background: url("http://architectureimg.com/wp-content/uploads/2016/06/skyscrapers-beautiful-san-francisco-night-thebeautifulbay-skyscrapers-bridge-city-lights-desktop-backgrounds.jpg");
+    color: #FF4500;
     }
 
 button {
